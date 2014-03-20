@@ -4,10 +4,13 @@ w5grid-rest-node
 
 This is a Restful Service sample, combination of [express](http://expressjs.com) and [mongoDB](http://www.mongodb.org/)
 
-You can test [W5Grid](https://github.com/inswave/w5) through Restful CRUD easy.
+You can test [W5Grid](https://github.com/inswave/w5) through Restful CRUD.
+
+The installation is very easy, please follow the instruction.
 
 ## Installation
 Before any installation begun, you must have [node.js](http://nodejs.org/) installed on your computer.
+
 
 Clone [W5Grid](https://github.com/inswave/w5grid-rest-node.git) from GitHub or install it through npm registry
 
@@ -37,13 +40,13 @@ Befor running express, MongoDB must be installed and executed.
 ....
 ```
 
-Run server.js. If the prameter is 'true', the initial data will be re populate.
+Run `server.js`. If the prameter is 'true', the initial data will be re populate.
 ```
 node server.js (true)
 ```
 
 ## Test
-You can test the sameple program. The sample is located under the test directory.
+You can test the sameple program. The sample is located under the /test directory.
 
 The test program has been written with [QUnit](https://qunitjs.com/) 
 
