@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>W5 - Fetch test</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;">
+        <link rel="stylesheet" href="./resources/qunit-1.12.0.css">
+        <link rel="stylesheet/less" type="text/css" href="./resources/grid.less">
+        <script src="./resources/less.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            less = {
+                env: "development", // or "production"
+                async: false,       // load imports async
+                fileAsync: false,   // load imports async when in a page under
+                // a file protocol
+                poll: 1000,         // when in watch mode, time in ms between polls
+                functions: {},      // user functions, keyed by name
+                dumpLineNumbers: "comments", // or "mediaQuery" or "all"
+                relativeUrls: false,// whether to adjust url's to be relative
+                // if false, url's are already relative to the
+                // entry less file
+                rootpath: ""// a path to add on to the start of every url
+                //resource
+            };
+        </script>
+        <link rel="stylesheet" type="text/css" href="./resources/reset.css">
+        <link rel="stylesheet" type="text/css" href="./resources/bootstrap.min.css">
+        <script src="./resources/bootstrap.min.js" type="text/javascript"></script>
+    </head>
+    <body style="border:0; margin:0">
+        <div id="qunit"></div>
+        <div id="qunit-fixture" style="margin-bottom:20px;"></div>
+        <script src="./resources/qunit-1.12.0.js"></script>
+        <script src="../components/jquery/jquery.min.js"></script>
+        <script src="../components/underscore/underscore.js"></script>
+        <script src="../components/backbone/backbone.js"></script>
+        <script src="../components/w5/dist/js/w5.min.0.5.5.js"></script>
+        <script src="./resources/fetch.js"></script>
+    </body>
+</html>

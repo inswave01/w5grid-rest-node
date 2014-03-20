@@ -1,0 +1,23 @@
+/* Reset */
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,.pre,form,p,blockquote,fieldset,input,abbr,article,aside,command,details,figcaption,figure,footer,header,hgroup,mark,meter,nav,output,.progress,section,summary,time
+{margin:0; padding:0; -webkit-text-size-adjust:none;}
+
+section, article, aside, nav, footer, header, hgroup, figure, video, audio, source, canvas, embed {display:block;}
+
+html {height:100%; overflow-y:scroll;}
+body {margin:0; padding:0; font-family:"돋움", Dotum, Helvetica, AppleGothic, Sans-serif; font-size:12px; line-height:1.3em; color:#222; overflow-y:visible;}
+
+a {color:#222; text-decoration:none;}
+a:link, a:visited {color:#222;}
+a:active, a:focus, a:hover {text-decoration:underline;}
+
+h1, h2, h3, h4, h5, h6, address {font-style:normal; font-size:12px; font-weight:normal;}
+address {display:none;}
+li, dt, dd {list-style:none;}
+img, fieldset {border:0;}
+/*caption, legend, hr {display:none;}*/
+table {border-collapse:collapse; border-spacing:0; empty-cells:show;}
+
+.clearfix:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.clearfix { display: inline-block; }
+* html .clearfix { height: 1%; } .clearfix { display: block; } * html .clearfix { zoom: 1; } /* IE6 */ *:first-child+html .clearfix { zoom: 1; } /* IE7 */
