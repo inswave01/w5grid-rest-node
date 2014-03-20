@@ -4,7 +4,7 @@ w5grid-rest-node
 
 This is a Restful Service sample, combination of [express](http://expressjs.com) and [mongoDB](http://www.mongodb.org/)
 
-You can test [W5Grid](https://github.com/inswave/w5) through Restful CRUD.
+You can test W5Grid through Restful CRUD.
 
 The installation is very easy, please follow the instruction.
 
