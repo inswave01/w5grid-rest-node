@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>W5 - Fetch Promises Test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../components/w5/dist/css/w5.min.css">
+  </head>
+  <body style="border:0; margin:0">
+    <div id='grid1'></div>
+    <script src="../components/jquery/jquery.min.js"></script>
+    <script src="../components/underscore/underscore.js"></script>
+    <script src="../components/backbone/backbone.js"></script>
+    <script src="../components/w5/dist/js/0.6.2/w5.min.js"></script>
+    <script type="text/javascript">
+      var getFetcher,
+          data,
+          model = Backbone.Model.extend( { idAttribute: "_id" } ),
+          List = Backbone.Collection.extend( { model: model, url: '/people' } ),
+          dataCols = new List(),
+          grid1 = new w5.Grid({
+            el : "#grid1",
+            option: {
+              width : "650px",
+              height : "400px",
+              caption : "Promises",
+              rowNum : 10
+            },
+            collection : dataCols,
+            colModel : [
+              {
+                width: 150,
+                id: 'first_name'
+              },
+              {
+                width: 150,
+                id: 'last_name'
+              },
+              {
+                width: 150,
+                headerLabel: 'company_name'
+              },
+              {
+                width: 150,
+                headerLabel: 'address'
+              },
+              {
+                width: 150,
+                id: 'city'
+              },
+              {
+                width: 150,
+                id: 'county'
+              },
+              {
+                width: 150,
+                id: 'state'
+              },
+              {
+                width: 150,
+                headerLabel: 'zip'
+              },
+              {
+                width: 150,
+                id: 'phone1'
+              },
+              {
+                width: 150,
+                headerLabel: 'phone2'
+              },
+              {
+                width: 150,
+                id: 'email'
+              },
+              {
+                width: 150,
+                headerLabel: 'web'
+              }
+            ],
+            defaults : function () {
+              return {
+                first_name: '',
+                last_name: '',
+                company_name: '',
+                address: '',
+                city: '',
+                county: '',
+                state: '',
+                zip: '',
+                phone1: '',
+                phone2: '',
+                email: '',
+                web: ''
+              };
+            }
+        }).render();
+
+      getFetcher = function( type, idx ) {
+        var lookup = {
+              collection: function( resolve, reject ) {
+                dataCols.fetch( { reset: true,
+                  success: function ( collection, response, options ) {
+                    resolve( response );
+                  },
+                  error: function ( collection, response, options ) {
+                    reject( Error( "[" + collection.url + "] " + response.statusText ) );
+                  }
+                });
+              },
+              model: function( resolve, reject, idx ) {
+                dataCols.at(idx).fetch({
+                  success: function ( model, response, options ) {
+                    resolve( response );
+                  },
+                  error: function ( model, response, options ) {
+                    reject( Error( "[" + model.collection.url + "/" + model._id + "] " + response.statusText ) );
+                  }
+                });
+              }
+            },
+            def = function() {};
+
+        return new Promise( function( resolve, reject ) {
+          lookup[type] ? lookup[type]( resolve, reject, idx ) : def();
+        });
+      };
+
+      getFetcher('collection').then( function(response) {
+        console.log( 'SUCCESS', response.length );
+      }, function(error) {
+        console.error( 'FAIL', error );
+      }).then( function (response) {
+        grid1.cell(0,0).set('data', 'Ruud');
+        console.log( 'firstName is changed', grid1.cell(0,0).get('data') );
+      }).then( function (response) {
+        return getFetcher('model', 0);
+      }).then( function (response) {
+        console.log( 'firstName is restored', grid1.cell(0,0).get('data') );
+
+        data = { phone1: '111-111-1111', phone2: '222-222-2222' };
+        grid1.row(0).set( 'data', data, { save: true, saved: true } );
+        console.log( 'change phone1 and phone2' );
+
+        return getFetcher('model', 0);
+      }).then( function (response) {
+        console.log( 'fetch phone1 and phone2 ', _.pick( response, ['phone1', 'phone2'] ) );
+
+        data = { phone1: '504-621-8927', phone2: '504-845-1427' };
+        grid1.row(0).set( 'data', data, { save: true, saved: true, pick: ['phone1', 'phone2'] } );
+
+        return getFetcher('model', 0);
+      }).then( function (response) {
+        console.log( 'patch phone1 and phone2 ', _.pick( response, ['phone1', 'phone2'] ) );
+
+        data = { "first_name": "shye", "last_name": "lee", "company_name": "inswave",
+                 "address": "guro", "city": "seoul", "county": "korea", "state": "guro", "zip": "1234",
+                 "phone1": "123-456-1234", "phone2": "789-123-4567",
+                 "email": "shye0919@inswave.com", "web": "http://www.inswave.com" };
+
+        grid1.addRow( 0, data, { save: true, success: function ( model, response, options ) {
+          console.log( 'create a Row ', _.omit( response, '_id' ) );
+        }} );
+      }).then( function (response) {
+        grid1.removeRow( 1, { destroy: true, success: function ( model, response, options ) {
+          console.log( 'remove the Row ', response.result );
+        }});
+      });
+    </script>
+  </body>
+</html>
