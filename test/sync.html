@@ -18,7 +18,8 @@
         <script type="text/javascript">
         test( "sync Server", function () {
             $("body").append("<div id='grid5'>");
-            dataCols = new w5.Collection( null, { url: '/people' } );
+            dataCols = new Backbone.Collection();
+            dataCols.url = '/people';
 
             grid5 = new w5.Grid({
                 el : "#grid5",
@@ -109,7 +110,7 @@
             asyncTest( "request to server", 1, function () {
                 expect( 1 );
 
-                dataCols.fetch( { reset: true, silent: true, success: function () {
+                dataCols.fetch( { reset: true, success: function () {
                     ok( grid5.getRowLength() === 500, 'read from server' );
                     start();
                 } } );
@@ -117,10 +118,11 @@
         });
 
         test( "sync Server2", function () {
-            var model = w5.Model.extend( { idAttribute: "_id" } );
+            var model = Backbone.Model.extend( { idAttribute: "_id" } ),
+                collection = Backbone.Collection.extend( { model: model, url: '/people', urlCUD: '/mixed' } );
 
             $("body").append("<div id='grid6'>");
-            dataCols2 = null;
+            dataCols2 = new collection();
 
             grid6 = new w5.Grid({
                 el : "#grid6",
@@ -130,7 +132,7 @@
                     caption : "TEST2",
                     rowNum : 10
                 },
-                collection : new w5.Collection( null, { model: model, url: '/people', urlCUD: '/mixed' } ),
+                collection : dataCols2,
                 colModel : [
                     {
                         width: 150,

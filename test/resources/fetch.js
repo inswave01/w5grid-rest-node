@@ -1,6 +1,7 @@
 test( "Fetch server", function () {
   $("body").append("<div id='grid5'>");
-  var dataCols = new w5.Collection( null, { url: '/people' } );
+  var collection = Backbone.Collection.extend( { url: '/people' } ),
+      dataCols = new collection();
 
   grid5 = new w5.Grid({
     el : "#grid5",
@@ -90,20 +91,21 @@ test( "Fetch server", function () {
 
   asyncTest( "request to server", 1, function () {
     expect( 1 );
-
-    dataCols.fetch( { reset: true, silent: true, success: function () {
+    dataCols.fetch( { reset: true, success: function () {
       ok( grid5.getRowLength() === 500, 'read from server' );
       start();
     } } );
   } );
 });
 
-
 test( "fetch Server2", function () {
-  var model = w5.Model.extend( { idAttribute: "_id" } );
+  var model = Backbone.Model.extend( { idAttribute: "_id" } ),
+      collection = Backbone.Collection.extend( { model: model } );
 
   $("body").append("<div id='grid6'>");
-  dataCols2 = null;
+
+  dataCols2 = new collection();
+  dataCols2.url = '/people';
 
   grid6 = new w5.Grid({
     el : "#grid6",
@@ -113,7 +115,7 @@ test( "fetch Server2", function () {
       caption : "TEST2",
       rowNum : 10
     },
-    collection : new w5.Collection( null, { model: model, url: '/people' } ),
+    collection : dataCols2,
     colModel : [
       {
         width: 150,
@@ -193,7 +195,6 @@ test( "fetch Server2", function () {
         test( "request to server2", function () {
           ok( grid6.getRowLength() === 500, 'fetch from server' );
         });
-        dataCols2 = collection;
       }
     }
   }).render();
