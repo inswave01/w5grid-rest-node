@@ -108,11 +108,11 @@
           },
           sync: function( resolve, reject, options ) {
             grid1.syncData( _.extend( options, { reset: true,
-              success: function ( collection, response, options ) {
-                resolve( collection.message );
+              success: function ( returnData, status, options ) {
+                resolve( returnData.message );
               },
               error: function ( collection, response, options ) {
-                reject( Error( "[" + collection.url + "] " + response.statusText ) );
+                reject( Error( "[" + this.url + "] " + collection.statusText ) );
               }
             }));
           }
@@ -146,6 +146,8 @@
         console.log( 'create & delete' );
 
         return getSyncer( 'sync', { pick: true, saved: true, excludeCreate: true, excludeUpdate: true } );
+      }, function( error ) {
+        console.error(error);
       }).then( function (response) {
         console.log( response );
 
