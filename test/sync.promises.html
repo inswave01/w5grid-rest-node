@@ -147,7 +147,7 @@
 
         return getSyncer( 'sync', { pick: true, saved: true, excludeCreate: true, excludeUpdate: true } );
       }, function( error ) {
-        console.error(error);
+        console.error( 'FAIL', error );
       }).then( function (response) {
         console.log( response );
 
