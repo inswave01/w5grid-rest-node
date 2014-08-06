@@ -55,3 +55,12 @@ On the browser, type the following URL to see the test result.
 http://localhost:3000/test/fetch.html
 http://localhost:3000/test/sync.html
 ```
+Test can be done by the samples that is applying Promise.  
+
+```
+http://localhost:3000/test/fetch.promises.html
+http://localhost:3000/test/sync.promises.html
+```
+
+Browser limitation exists when using browser Native Promise object without external library.  
+Check [Can I use](http://caniuse.com/promises) for the supported browers.  
