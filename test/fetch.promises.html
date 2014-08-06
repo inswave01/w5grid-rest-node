@@ -10,7 +10,7 @@
     <script src="../components/jquery/jquery.min.js"></script>
     <script src="../components/underscore/underscore.js"></script>
     <script src="../components/backbone/backbone.js"></script>
-    <script src="../components/w5/dist/js/1.0.0/w5.min.js"></script>
+    <script src="../components/w5/dist/js/1.0.1/w5.min.js"></script>
     <script type="text/javascript">
       var getFetcher,
           data,
@@ -161,7 +161,7 @@
         }} );
       }).then( function (response) {
         grid1.removeRow( 1, { destroy: true, success: function ( model, response, options ) {
-          console.log( 'remove the Row ', response.result );
+          console.log( 'removed the Row ', response.result );
         }});
       });
     </script>
