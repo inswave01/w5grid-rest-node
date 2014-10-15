@@ -137,8 +137,8 @@
         grid1.addRow( 4, { first_name: 'B' } );
         console.log( 'multiple modification' );
 
-        return getSyncer( 'sync', { pick: true, saved: true } );
-      }).then( function (response) {
+        return getSyncer( 'sync', { saved: true } );
+      } ).then( function (response) {
         console.log( response );
 
         grid1.addRow( 0, { first_name: 'C' } );
