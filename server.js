@@ -11,6 +11,7 @@ var populate = (function () {
     people = require('./routes/people')(populate),
     app = express();
 
+app.use( express.favicon() );
 app.use( express.json() );
 
 app.get(    '/people',      people.select );
