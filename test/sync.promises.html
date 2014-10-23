@@ -15,7 +15,7 @@
       var getSyncer,
           data,
           Model = Backbone.Model.extend( { idAttribute: "_id" } ),
-          List = Backbone.Collection.extend( { model: Model, url: '/people', urlCUD: '/mixed' } ),
+          List = Backbone.Collection.extend( { model: Model, url: '/people', compoundURL: '/mixed' } ),
           dataCols = new List(),
           grid1 = new w5.Grid({
             el : "#grid1",

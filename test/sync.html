@@ -119,7 +119,7 @@
 
         test( "sync Server2", function () {
             var model = Backbone.Model.extend( { idAttribute: "_id" } ),
-                collection = Backbone.Collection.extend( { model: model, url: '/people', urlCUD: '/mixed' } );
+                collection = Backbone.Collection.extend( { model: model, url: '/people', compoundURL: '/mixed' } );
 
             $("body").append("<div id='grid6'>");
             dataCols2 = new collection();
