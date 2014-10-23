@@ -137,7 +137,7 @@
         grid1.addRow( 4, { first_name: 'B' } );
         console.log( 'multiple modification' );
 
-        return getSyncer( 'sync', { saved: true } );
+        return getSyncer( 'sync', { saved: true, modified: true } );
       } ).then( function (response) {
         console.log( response );
 
@@ -145,13 +145,13 @@
         grid1.removeRow(3);
         console.log( 'create & delete' );
 
-        return getSyncer( 'sync', { pick: true, saved: true, excludeCreate: true, excludeUpdate: true } );
+        return getSyncer( 'sync', { pick: true, saved: true, modified: true, excludeCreate: true, excludeUpdate: true } );
       }, function( error ) {
         console.error( 'FAIL', error );
       }).then( function (response) {
         console.log( response );
 
-        return getSyncer( 'sync', { pick: true, saved: true, excludeUpdate: true, afterProcess: true } );
+        return getSyncer( 'sync', { pick: true, saved: true, modified: true, excludeUpdate: true, afterProcess: true } );
       }).then( function (response) {
         console.log( response );
       });
