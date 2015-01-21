@@ -127,14 +127,14 @@ module.exports = function ( runPopulate ) {
 
     console.log( 'mixed[' + JSON.stringify( req.body ) + ']' );
 
-    dummy = req.body.create;
+    dummy = req.body.createList;
     _.map( dummy, function ( ele ) {
       return ele.result = 'successServerSync';
     });
 
     res.json( { result: 'success',
-                message: 'create[' + req.body.create.length + '] update[' + req.body.update.length + '] delete[' + req.body.delete.length + ']',
-                create: dummy } );
+                message: 'create[' + req.body.createList.length + '] update[' + req.body.updateList.length + '] delete[' + req.body.deleteList.length + ']',
+                createList: dummy } );
 
 //    res.send(500, 'Something broke!');
   };

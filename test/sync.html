@@ -5,16 +5,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge;">
         <link rel="stylesheet" href="./resources/qunit-1.12.0.css">
-        <link rel="stylesheet" href="../components/w5/dist/css/w5.min.css">
+        <link rel="stylesheet" href="../bower_components/w5/dist/css/w5.min.css">
     </head>
-    <body style="border:0px;margin:0px">
+    <body style="border:0;margin:0">
         <div id="qunit"></div>
         <div id="qunit-fixture" style="margin-bottom:20px;"></div>
         <script src="./resources/qunit-1.12.0.js"></script>
-        <script src="../components/jquery/jquery.min.js"></script>
-        <script src="../components/underscore/underscore.js"></script>
-        <script src="../components/backbone/backbone.js"></script>
-        <script src="../components/w5/dist/js/1.0.1/w5.min.js"></script>
+        <script src="../bower_components/jquery/jquery.min.js"></script>
+        <script src="../bower_components/underscore/underscore.js"></script>
+        <script src="../bower_components/backbone/backbone.js"></script>
+        <script src="../bower_components/w5/dist/js/1.2.0/w5.min.js"></script>
         <script type="text/javascript">
         test( "sync Server", function () {
             $("body").append("<div id='grid5'>");
@@ -266,7 +266,7 @@
                                                                         grid6.cell(6,1).set('data', 'TD');
                                                                         grid6.addRow(4, {first_name: 'B'});
 
-                                                                        grid6.syncData( { pick: true, saved: true, success: function ( model, response, options ) {
+                                                                        grid6.syncData( { pick: true, saved: true, modified: true, success: function ( model, response, options ) {
                                                                             equal( model.message, 'create[2] update[2] delete[2]');
                                                                             start();
 
@@ -275,14 +275,14 @@
                                                                                 grid6.addRow(0, {first_name: 'C'});
                                                                                 grid6.removeRow(3);
 
-                                                                                grid6.syncData( { pick: true, saved: true, excludeCreate: true, excludeUpdate: true, success: function ( model, response, options ) {
+                                                                                grid6.syncData( { pick: true, saved: true, modified: true, excludeCreate: true, excludeUpdate: true, success: function ( model, response, options ) {
                                                                                     equal( model.message, 'create[0] update[0] delete[1]');
                                                                                     start();
 
                                                                                     asyncTest( "syncData3", function () {
                                                                                         expect(2);
 
-                                                                                        grid6.syncData( { pick: true, saved: true, excludeUpdate: true, afterProcess: true, success: function ( model, response, options ) {
+                                                                                        grid6.syncData( { pick: true, saved: true, modified: true, excludeUpdate: true, afterProcess: true, success: function ( model, response, options ) {
                                                                                             equal( model.message, 'create[1] update[0] delete[0]');
                                                                                             equal( grid6.row(0).get('data').result, 'successServerSync');
                                                                                             start();
